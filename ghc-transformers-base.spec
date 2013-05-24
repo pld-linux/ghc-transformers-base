@@ -1,5 +1,5 @@
 %define		pkgname	transformers-base
-Summary:	This package provides a straightforward port of monadLib's BaseM typeclass to transformers.
+Summary:	This package provides a straightforward port of monadLib's BaseM typeclass to transformers
 Name:		ghc-%{pkgname}
 Version:	0.4.1
 Release:	1
@@ -18,7 +18,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_enable_debug_packages	0
 
 %description
-This package provides a straightforward port of monadLib's BaseM typeclass to transformers.
+This package provides a straightforward port of monadLib's BaseM
+typeclass to transformers.
 
 %package doc
 Summary:	HTML documentation for %{pkgname}
@@ -57,7 +58,7 @@ cp -a $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/html %{name}-%{version}-doc
 runhaskell Setup.hs register \
 	--gen-pkg-config=$RPM_BUILD_ROOT/%{_libdir}/%{ghcdir}/package.conf.d/%{pkgname}.conf
 
-%{__rm} -rf $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/
 
 %clean
 rm -rf $RPM_BUILD_ROOT

@@ -6,21 +6,23 @@
 Summary:	Straightforward port of monadLib's BaseM typeclass to transformers
 Summary(pl.UTF-8):	Bezpośredni port klasy typu BaseM z biblioteki monadLib do transformers
 Name:		ghc-%{pkgname}
-Version:	0.4.1
+Version:	0.4.5.2
 Release:	1
 License:	BSD
 Group:		Development/Languages
 #Source0Download: http://hackage.haskell.org/package/transformers-base
 Source0:	http://hackage.haskell.org/package/transformers-base-%{version}/%{pkgname}-%{version}.tar.gz
-# Source0-md5:	bd99282e2daae5eecd1c953b7b77c990
+# Source0-md5:	07093f89dd8720ce338e55a169eb5839
 URL:		http://hackage.haskell.org/package/transformers-base
 BuildRequires:	ghc >= 6.12.3
 BuildRequires:	ghc-base >= 3
 BuildRequires:	ghc-base < 5
 BuildRequires:	ghc-transformers >= 0.2
+BuildRequires:	ghc-transformers-compat >= 0.6.1
 %if %{with prof}
 BuildRequires:	ghc-base-prof >= 3
 BuildRequires:	ghc-base-prof < 5
+BuildRequires:	ghc-transformers-compat-prof >= 0.6.1
 BuildRequires:	ghc-transformers-prof >= 0.2
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.608
@@ -29,6 +31,7 @@ Requires(post,postun):	/usr/bin/ghc-pkg
 Requires:	ghc-base >= 3
 Requires:	ghc-base < 5
 Requires:	ghc-transformers >= 0.2
+Requires:	ghc-transformers-compat >= 0.6.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # debuginfo is not useful for ghc
@@ -52,6 +55,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	ghc-base-prof >= 3
 Requires:	ghc-base-prof < 5
+Requires:	ghc-transformers-compat-prof >= 0.6.1
 Requires:	ghc-transformers-prof >= 0.2
 
 %description prof
@@ -115,16 +119,18 @@ rm -rf $RPM_BUILD_ROOT
 %doc LICENSE
 %{_libdir}/%{ghcdir}/package.conf.d/%{pkgname}.conf
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/HStransformers-base-%{version}.o
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHStransformers-base-%{version}.a
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHStransformers-base-%{version}-*.so
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHStransformers-base-%{version}-*.a
+%exclude %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHStransformers-base-%{version}-*_p.a
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Control
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Control/Monad
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Control/Monad/Base.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Control/Monad/Base.dyn_hi
 
 %if %{with prof}
 %files prof
 %defattr(644,root,root,755)
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHStransformers-base-%{version}_p.a
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHStransformers-base-%{version}-*_p.a
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Control/Monad/Base.p_hi
 %endif
 

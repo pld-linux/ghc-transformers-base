@@ -7,7 +7,7 @@ Summary:	Straightforward port of monadLib's BaseM typeclass to transformers
 Summary(pl.UTF-8):	Bezpośredni port klasy typu BaseM z biblioteki monadLib do transformers
 Name:		ghc-%{pkgname}
 Version:	0.4.5.2
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages
 #Source0Download: http://hackage.haskell.org/package/transformers-base
